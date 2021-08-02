@@ -1,8 +1,11 @@
 // root file (our-domain.com/)
 // Not needed import React from 'react' (behind the scenes)
 // not needed ==> import { useState, useEffect } from 'react'
+import Head from 'next/head'
+import { Fragment } from 'react';
 import MeetupList from '../components/meetups/MeetupList';
 import { MongoClient } from 'mongodb'
+
 const MONGO_URL = process.env.MONGO_URL
 
 const DUMMY = [{
@@ -40,7 +43,14 @@ const HomePage = (props) => {
   return (
     // Instead of meetups={props.loadedMeetups}
     // Now in the page source we have the array of meetups!!
-    <MeetupList meetups={props.meetups} />
+    // The head is used to set metadata of the page, like title, description, etc
+    <Fragment>
+      <Head>
+        <title>React Meetups</title>
+        <meta name='description' content='Browse a lot of react meetups' />
+      </Head>
+      <MeetupList meetups={props.meetups} />
+    </Fragment>
   );
 };
 

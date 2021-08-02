@@ -1,4 +1,6 @@
 import { MongoClient, ObjectId } from 'mongodb'
+import { Fragment } from 'react'
+import Head from 'next/head'
 import MeetupDetail from '../../components/meetups/MeetupDetail'
 
 const MONGO_URL = process.env.MONGO_URL
@@ -6,13 +8,20 @@ const MONGO_URL = process.env.MONGO_URL
 function MeetupDetails(props) {
   const meetup = props.meetupData
 
+  // Dinamic head
   return (
-    <MeetupDetail
-      image={meetup.image}
-      title={meetup.title}
-      address={meetup.address}
-      description={meetup.description}
-    />
+    <Fragment>
+      <Head>
+        <title>{meetup.title} description</title>
+        <meta name='description' content={meetup.description} />
+      </Head>
+      <MeetupDetail
+        image={meetup.image}
+        title={meetup.title}
+        address={meetup.address}
+        description={meetup.description}
+      />
+    </Fragment>
   )
 }
 
